@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div class="container">
+        <div id="tasks">
+
+            <div v-show="remaining.length">
+                <h1>Tasks ({{ remaining.length }})</h1>
+
+                <ol class="list-group">
+                    <li v-for="task in tasks  | inProcess"
+                        class="list-group-item">
+                        <span v-on:dblclick="editTask(task)"> {{ task.body }} </span>
+                        <button v-on:click="removeTask(task)">&#10007</button>
+                        <button v-on:click="toggleTaskCompletion(task)">&#10004</button>
+
+                    </li>
+                </ol>
+
+            </div>
+
+            <form v-on:submit="addTask">
+                <div class="form-group">
+                    <input type="text"
+                           v-model="newTask"
+                           v-el="newTask"
+                           class="form-control"
+                           placeholder="I need to..."
+                    >
+                </div>
+
+                <button class="btn btn-primary">Add task</button>
+                <button class="btn btn-default"
+                        v-on:click="completeAll"
+                >
+                    Mark All As Completed
+                </button>
+            </form>
+
+
+            <div v-if="completions.length">
+                <h1>Completed Tasks ({{ completions.length }})</h1>
+
+                <ol class="list-group">
+                    <li v-for="task in tasks  | filterBy true in 'completed'"
+                        class="list-group-item"
+                    >
+                        {{ task.body }}
+
+                        <button v-on:click="toggleTaskCompletion(task)">&#10007</button>
+
+                    </li>
+                </ol>
+
+                <button v-on:click="clearCompleted" class="btn btn-danger">Clear Completed</button>
+
+            </div>
+
+            <!--<pre> {{ $data | json }} </pre>-->
+
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.js"></script>
+    <script src="https://cdn.rawgit.com/simplesmiler/vue-focus/0.1.1/dist/vue-focus.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
