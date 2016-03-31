@@ -1,3 +1,5 @@
+/*task list i google maps tutorial css fajl
+
 #tasks {
     margin: 2em 0;
 }
@@ -10,5 +12,27 @@ li button {
     color: red;
     float: right;
     margin-left: 10px;
-    
+
 }
+
+body, html, .container, #maps {
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding: 0;
+}
+#map {
+    width: 500px;
+    height: 300px;
+}
+
+form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index:2;
+    margin: 10px;
+}
+*/
+
+

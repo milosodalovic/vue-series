@@ -6,71 +6,185 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="app.css">
+
+    <style>
+        /* ########################## Video x iz serije tuotrijala za Vue 1.0 ########################## */
+
+        /* ########################## Video 7, 8 i 9 iz serije tuotrijala za Vue 1.0 ########################## */
+        .completed { text-decoration: line-through; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div id="tasks">
-
-            <div v-show="remaining.length">
-                <h1>Tasks ({{ remaining.length }})</h1>
-
-                <ol class="list-group">
-                    <li v-for="task in tasks  | inProcess"
-                        class="list-group-item">
-                        <span v-on:dblclick="editTask(task)"> {{ task.body }} </span>
-                        <button v-on:click="removeTask(task)">&#10007</button>
-                        <button v-on:click="toggleTaskCompletion(task)">&#10004</button>
-
-                    </li>
-                </ol>
-
-            </div>
-
-            <form v-on:submit="addTask">
-                <div class="form-group">
-                    <input type="text"
-                           v-model="newTask"
-                           v-el="newTask"
-                           class="form-control"
-                           placeholder="I need to..."
-                    >
-                </div>
-
-                <button class="btn btn-primary">Add task</button>
-                <button class="btn btn-default"
-                        v-on:click="completeAll"
-                >
-                    Mark All As Completed
-                </button>
-            </form>
+    <div class="container" id="container">
 
 
-            <div v-if="completions.length">
-                <h1>Completed Tasks ({{ completions.length }})</h1>
+        <!-- ########################## Video 8 i 9 iz serije tuotrijala za Vue 1.0 ##########################-->
+        <!--<tasks :list="tasks" :count.sync="count"> </tasks>-->
 
-                <ol class="list-group">
-                    <li v-for="task in tasks  | filterBy true in 'completed'"
-                        class="list-group-item"
-                    >
-                        {{ task.body }}
+        <!--<template id="tasks-template">-->
+            <!--<h1>-->
+                <!--Tasks-->
+                <!--<span v-show="remaining">({{remaining}})</span>-->
+            <!--</h1>-->
+            <!--<ul v-show="list.length">-->
+                <!--<li :class=" task.completed ? 'completed' : ''"-->
+                <!--v-for="task in list"-->
+                <!--@click = "task.completed = !task.completed"-->
+                <!--&gt;-->
+                    <!--{{ task. body }}-->
+                    <!--<strong @click="deleteTask(task)">X</strong>-->
+                <!--</li>-->
+            <!--</ul>-->
 
-                        <button v-on:click="toggleTaskCompletion(task)">&#10007</button>
+            <!--<p v-else>No tasks yet!</p>-->
+            <!--</hr>-->
+            <!--<button @click="clearCompleted">Clear Completed</button>-->
+        <!--</template>-->
 
-                    </li>
-                </ol>
+        <!-- ########################## Video 7 iz serije tuotrijala za Vue 1.0 ##########################-->
+        <!--<ul>-->
+           <!--<li :class=" task.completed ? 'completed' : ''"-->
+               <!--v-for="task in tasks"-->
+               <!--@click = "toggleCompletedFor(task)"-->
+           <!--&gt;-->
+               <!--{{ task. body }}-->
+           <!--</li>-->
+        <!--</ul>-->
 
-                <button v-on:click="clearCompleted" class="btn btn-danger">Clear Completed</button>
 
-            </div>
+        <!-- ########################## Video 6 iz serije tuotrijala za Vue 1.0 ##########################-->
+        <!--<div v-for="plan in plans">-->
+            <!--<plan :plan="plan" :active.sync="active"></plan>-->
+        <!--</div>-->
 
+        <!--<template id="plan-template">-->
+            <!--<span> {{ plan.name }} </span>-->
+            <!--<span> {{ plan.price }}/month </span>-->
+            <!--<button type="button" @click="setActivePlan" v-show="plan.name != active.name">-->
+               <!--{{ isUpgrade ? 'Upgrade' : 'Downgrade' }}-->
+            <!--</button>-->
+
+            <!--<span v-else>-->
+                <!--Selected-->
+            <!--</span>-->
+        <!--</template>-->
+
+<!-- ########################## Video 5 iz serije tuotrijala za Vue 1.0 ##########################-->
+    <!--<h1> {{ skill }}</h1>-->
+    <!--<input type="text" v-model="points">-->
+
+
+<!-- ########################## Video 4 iz serije tuotrijala za Vue 1.0 ########################## -->
+        <!--<counter subject="Likes"></counter>-->
+        <!--<counter subject="Dislikes"></counter>-->
+
+        <!--<template id="counter-template">-->
+            <!--<h1>{{ subject }}</h1>-->
+            <!--<button type="submit" @click="count+=1">-->
+                <!--Increment counter: {{ count }}-->
+            <!--</button>-->
+        <!--</template>-->
+
+<!-- ########################## Videi 2 i 3 iz serije tuotrijala za Vue 1.0 ########################## -->
+        <!--<form>-->
+            <!--<span class="error" v-show="!message">-->
+             <!--You must type the message-->
+            <!--</span> </br>-->
+
+            <!--<textarea v-model="message"> </textarea> </br>-->
+
+            <!--<button type="submit" v-show="message">-->
+                <!--Send message-->
+            <!--</button>-->
+        <!--</form>-->
+
+        <!--<pre> {{ $data | json }}</pre>-->
+
+<!-- ########################## google maps api tutorijal ########################## -->
+
+        <!--<div id="maps">-->
+
+            <!--<form>-->
+                <!--<input type="text" id="address" v-model="address" class="form-control" placeholder="123 Example St." debounce="500">-->
+            <!--</form>-->
+
+            <!--<map :address="address"> </map>-->
+            <!--<map address="central park"> </map>-->
+
+
+            <!--<template id="map-template">-->
+                <!--<div>-->
+                    <!--<div id="map" v-el:map></div>-->
+                <!--</div>-->
+            <!--</template>-->
             <!--<pre> {{ $data | json }} </pre>-->
 
-        </div>
+
+        <!--</div>-->
+<!-- ##########################Task list app ########################## -->
+        <!--<div id="tasks">-->
+
+            <!--<div v-show="remaining.length">-->
+                <!--<h1>Tasks ({{ remaining.length }})</h1>-->
+
+                <!--<ol class="list-group">-->
+                    <!--<li v-for="task in tasks  | inProcess"-->
+                        <!--class="list-group-item">-->
+                        <!--<span v-on:dblclick="editTask(task)"> {{ task.body }} </span>-->
+                        <!--<button v-on:click="removeTask(task)">&#10007</button>-->
+                        <!--<button v-on:click="toggleTaskCompletion(task)">&#10004</button>-->
+
+                    <!--</li>-->
+                <!--</ol>-->
+
+            <!--</div>-->
+
+            <!--<form v-on:submit="addTask">-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text"-->
+                           <!--v-model="newTask"-->
+                           <!--v-el="newTask"-->
+                           <!--class="form-control"-->
+                           <!--placeholder="I need to..."-->
+                    <!--&gt;-->
+                <!--</div>-->
+
+                <!--<button class="btn btn-primary">Add task</button>-->
+                <!--<button class="btn btn-default"-->
+                        <!--v-on:click="completeAll"-->
+                <!--&gt;-->
+                    <!--Mark All As Completed-->
+                <!--</button>-->
+            <!--</form>-->
+
+
+            <!--<div v-if="completions.length">-->
+                <!--<h1>Completed Tasks ({{ completions.length }})</h1>-->
+
+                <!--<ol class="list-group">-->
+                    <!--<li v-for="task in tasks  | filterBy true in 'completed'"-->
+                        <!--class="list-group-item"-->
+                    <!--&gt;-->
+                        <!--{{ task.body }}-->
+
+                        <!--<button v-on:click="toggleTaskCompletion(task)">&#10007</button>-->
+
+                    <!--</li>-->
+                <!--</ol>-->
+
+                <!--<button v-on:click="clearCompleted" class="btn btn-danger">Clear Completed</button>-->
+
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<pre> {{ $data | json }} </pre>&ndash;&gt;-->
+
+        <!--</div>-->
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.js"></script>
-    <script src="https://cdn.rawgit.com/simplesmiler/vue-focus/0.1.1/dist/vue-focus.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.20/vue.js"></script>
     <script src="app.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKOtmPMylqTlOeBwSzKxheUAbVhu1Fypg&callback=app.init" async defer></script>-->
+    <!--<script src="https://cdn.rawgit.com/simplesmiler/vue-focus/0.1.1/dist/vue-focus.js"></script>-->
 </body>
 </html>
